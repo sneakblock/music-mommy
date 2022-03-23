@@ -10,8 +10,35 @@
 	<body>
 		<script src="js/three.js"></script>
 		<script>
-			var audioContext = new window.AudioContext();
-            var analyzer = audioContext.createAnalyser();
+
+			//Setup AudioContext
+			const handleSuccess = function(stream) {
+
+    			const audioContext = new AudioContext();
+    			const source = audioContext.createMediaStreamSource(stream);
+				const analyser = audioContext.createAnalyser();
+				analyser.fftSize = 2048;
+				var bufferLength = analyser.frequencyBinCount;
+				var dataArray = new Uint8Array(bufferLength);
+				analyser.getByteFrequencyData(dataArray);
+
+    			source.connect(analyser);
+    			analyser.connect(audioContext.destination);
+
+  			};
+
+			//Get the mic input from the user
+			navigator.mediaDevices.getUserMedia({audio: true, video: false}).then(handleSuccess);
+
+            function animate() {
+				requestAnimationFrame(animate);
+
+				
+			};
+
+			animate();
+
+
 		</script>
 	</body>
 </html>
