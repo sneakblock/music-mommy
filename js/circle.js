@@ -7,9 +7,15 @@ function animate() {
     requestAnimationFrame( animate );
 
     for (const o of objs) {
-        o.rotation.x += 0.01;
-        o.rotation.y += 0.01;
+        o.rotation.x += spectrum[spectrum.length / 2]/1000;
+        o.rotation.y += spectrum[spectrum.length / 2]/1000;
+        // o.scale.x *= spectrum[0]/20;
+        // o.scale.y *= spectrum[0]/20;
     }
+
+    // for (i = 0; i < spectrum.length; i++) {
+    //     console.log(spectrum[0]);
+    // }
 
     renderer.render( scene, camera );
 };
@@ -17,7 +23,7 @@ function animate() {
 function new_circle(scene, radius, segments, color) {
     const geometry = new THREE.CircleGeometry(radius, segments);
     const material = new THREE.MeshBasicMaterial( { color: color } );
-    const circle = new THREE.Mesh( geometry, material );
+    const circle = new THREE.Mesh(geometry, material);
     scene.add(circle);
     objs.push(circle);
 }
