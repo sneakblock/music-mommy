@@ -7,8 +7,8 @@ function animate() {
     requestAnimationFrame( animate );
 
     for (const o of objs) {
-        o.rotation.x += spectrum[spectrum.length / 2]/1000;
-        o.rotation.y += spectrum[spectrum.length / 2]/1000;
+        // o.rotation.x += spectrum[spectrum.length / 2]/800;
+        o.rotation.y += spectrum[spectrum.length / 2]/800;
         // o.scale.x *= spectrum[0]/20;
         // o.scale.y *= spectrum[0]/20;
     }
