@@ -1,15 +1,14 @@
 let canvas;
-let col;
+let mic;
 
 function setup() {
     canvas = createCanvas(windowWidth / 2, windowHeight);
     canvas.position = (0, 0);
-
-    col = 0;
+    mic = new p5.AudioIn();
+    mic.start();
 }
 
 function draw() {
-    col++;
-    if (col > 255) col = 0;
-    background(col);
+    background(51);
+    
 }
