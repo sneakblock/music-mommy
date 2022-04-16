@@ -1,13 +1,13 @@
 const objs = [];
 
 //new_circle(scene, 0.25, 40, 0xdb7093);
-new_circle(scene, 0.1, 40, 0xdb7093, 0, 0);
+new_circle(scene, 1.5, 40, 0xdb7093, 0, 0);
 for (let i = 0; i < 6; i++) {
     let angle = i * 60;
-    new_circle(scene, 0.05, 30, 0xCF9FFF, 2.5, angle);
+    new_circle(scene, 0.5, 30, 0xCF9FFF, 40, angle);
     for (let j = 0; j < 6; j++) {
         let angle = j * 60;
-        new_circle(scene, 0.02, 20, 0xA7C7E7, 4, angle);
+        new_circle(scene, 0.25, 20, 0xA7C7E7, 60, angle);
     }
 }
 

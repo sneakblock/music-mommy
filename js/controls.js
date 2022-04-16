@@ -1,10 +1,12 @@
 let canvas;
 let mic;
 let fft;
-let spectrum;
+let spectrum = [];
+let scaledFreq = [];
 let spectrumLen;
 let beatEllipseWidth;
 let freqVal;
+
 
 //Sliders
 let smoothingSlider;
@@ -23,17 +25,18 @@ function setup() {
     peakDetect = new p5.PeakDetect();
 
     smoothingSlider = createSlider(0, 1, 0.9, .001);
-    smoothingSlider.position(10, height);
+    smoothingSlider.position(10, 820);
     smoothingSlider.style('width', '80px');
 
     frequencySlider = createSlider(0, spectrumLen, spectrumLen / 2, 1);
-    frequencySlider.position(150, height);
+    frequencySlider.position(150, 820);
     frequencySlider.style('width', '80px');
 
 }
 
 function draw() {
     background(230);
+
     spectrum = fft.analyze();
     spectrumLen = spectrum.length;
     peakDetect.update(fft);
@@ -57,10 +60,17 @@ function draw() {
     noFill();
     //Draw spectrograph
     beginShape();
-    for (i = 0; i < spectrum.length; i++) {
+    for (i = 0; i < 256; i++) {
+        scaledFreq[i] = spectrum[i] * 0.05;
         vertex(i, map(spectrum[i], 0, 255, height, 0));
     }
+    
     endShape();
+
+    if (planeCustomMaterial != null) {
+        planeCustomMaterial.uniforms.frequencies.value = scaledFreq;
+        renderer.render(scene, camera);
+    }
 
     fft.smooth(smoothingSlider.value());
     freqVal = frequencySlider.value();
